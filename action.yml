@@ -1,0 +1,30 @@
+name: Update Discord embeds
+description: "Update embeds through Discord webhooks based on changed files"
+
+inputs:
+  webhooks_secret:
+    description: "WEBHOOKS secret"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+  - id: json_changes
+    uses: tj-actions/changed-files@v11.7
+    with:
+        files: |
+          .json$
+        separator: ","
+
+  - name: Patch webhooks with edits
+    if: steps.json_changes.outputs.any_changed == 'true'
+    shell: bash
+    env:
+      WEBHOOKS_SECRET: ${{ inputs.webhooks_secret }}
+      MODIFIED_FILES: ${{ steps.json_changes.outputs.all_modified_files }}
+    run: |
+      echo "installing npm packages"
+      npm config set fund false 
+      npm install axios
+      echo "excecuting patch-webhooks "
+      node patch-webhooks.js

@@ -1,0 +1,20 @@
+name: edit webhooks (main)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  edit-webhooks:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
+    - name: Update Discord embeds
+      uses: vertxxyz/discord-embeds-action@main
+      with:
+        webhooks_secret: ${{ secrets.WEBHOOKS }}

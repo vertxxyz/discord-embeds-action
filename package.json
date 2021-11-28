@@ -1,0 +1,22 @@
+{
+  "name": "discord-embeds-action",
+  "version": "1.0.0",
+  "description": ":octocat: Github action to update embeds through Discord webhooks",
+  "main": "patch-webhooks.js",
+  "dependencies": {
+    "axios": "^0.24.0"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vertxxyz/discord-embeds-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vertxxyz/discord-embeds-action/issues"
+  },
+  "homepage": "https://github.com/vertxxyz/discord-embeds-action#readme"
+}
