@@ -29,6 +29,7 @@ ChannelId1,WebhookURL1
 ChannelId2,WebhookURL2
 ```  
 Each channel needs an associated webhook url listed in the secret or none of the posts under it will be updated.  
+For easier maintanance you can append extra csv data at the end of the line, eg. `ChannelId1,WebhookURL1,channel-name`.  
 
 ## Usage
 This action does not support *making* posts, only editing them.  
@@ -60,13 +61,13 @@ jobs:
 This action uses [tj-actions/changed-files](https://github.com/tj-actions/changed-files) to gather the edited json files.  
 
 #### Authoring editable posts
-1. Author and post a webhook embed using a service like [Discohook](https://discohook.org)
+1. Author and post a webhook embed using a service like [Discohook](https://discohook.org).
 2. Add a channel folder under the `embeds` folder.
-3. Add a `channel-name.meta` file next to that folder with the same name as the folder
-4. Edit the file with the channel ID only. Find the ID by right-clicking on the channel and pressing Copy ID (requires: User Settings > App Settings > Advanced > Developer Mode).
+3. Add a `channel-name.meta` file next to that folder with the same name as the folder.
+4. Edit the file to contain the channel ID only. Find the ID by right-clicking on the channel and pressing Copy ID (requires: User Settings > App Settings > Advanced > Developer Mode).
 5. Add a file under the channel folder, `post-name.json`, and edit it with the JSON Data of the embed.
 6. Add a `post-name.meta` file next to the `post-name.json` file with the same name.
-7. Edit the file with the post ID only. Find the ID by right-clicking on the post and pressing Copy ID.
+7. Edit the file to contain the post ID only. Find the ID by right-clicking on the post and pressing Copy ID.
 8. Inside of the repo's secrets (Settings > Secrets), ensure there is a secret named `WEBHOOKS` that contains a CSV pair: `ChannelId,WebhookURL` on a new line. Channels only need to be added once.  
 	Keep a copy of the secret locally to append to it. Secrets cannot be edited through github, only re-submitted entirely.
 9. Next time you edit `post-name.json`, the changes should update the discord post.

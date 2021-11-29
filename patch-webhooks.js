@@ -75,14 +75,14 @@ if (!noChanges) {
 	// Collect channel IDs to webhook URLs.
 	let channelIdToWebhookUrl = {};
 	for (let channelIdAndWebhookUrl of webhooks) {
-		if (channelIdAndWebhookUrl.length !== 2) {
-			console.error(`WEBHOOKS secret was not formatted as "ChannelId,WebhookURL" CSV.`);
+		if (channelIdAndWebhookUrl.length < 2) {
+			console.error(`WEBHOOKS secret was not formatted as "ChannelId,WebhookURL..." CSV.`);
 			threwError = true;
 			break;
 		}
 		let channelId = channelIdAndWebhookUrl[0];
 		if (!regexId.test(channelId)) {
-			console.error(`Channel ID in WEBHOOKS secret was not valid. Perhaps an incorrectly formatted "ChannelId,WebhookURL" CSV was provided?`);
+			console.error(`Channel ID in WEBHOOKS secret was not valid. Perhaps an incorrectly formatted "ChannelId,WebhookURL..." CSV was provided?`);
 			threwError = true;
 			break;
 		}
