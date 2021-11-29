@@ -20,11 +20,12 @@ runs:
     if: steps.json_changes.outputs.any_changed == 'true'
     shell: bash
     env:
+      WORKSPACE: ${{ github.workspace }}
       WEBHOOKS_SECRET: ${{ inputs.webhooks_secret }}
       MODIFIED_FILES: ${{ steps.json_changes.outputs.all_modified_files }}
     run: |
-      echo "installing npm packages"
+      cd $GITHUB_ACTION_PATH
       npm config set fund false 
       npm install axios
-      echo "excecuting patch-webhooks "
-      node $GITHUB_ACTION_PATH/patch-webhooks.js
+      echo "patching webhooks"
+      node patch-webhooks.js

@@ -3,6 +3,8 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
+const workspace = process.env.WORKSPACE;
+
 // Parse webhook csv
 const webhook_secret = process.env.WEBHOOKS_SECRET;
 const webhooks = webhook_secret.trim()
@@ -20,6 +22,9 @@ let modifiedFiles =
 			file.startsWith('embeds/') ||
 			file.includes('/embeds/')
 		)
+	)
+	.map (
+		file => `${workspace}/${file}`
 	);
 
 const regexId = /[0-9]{18}/;
@@ -28,7 +33,6 @@ let threwError = false;
 // Parse modified files into channel ids to post objects (containing ids and json)
 let channelIdToPostObject = {};
 for (var filePath of modifiedFiles) {
-	filePath = filePath.toLowerCase();
 	if (!filePath.endsWith('.json'))
 		continue;
 
@@ -134,7 +138,16 @@ for (let channelId in channelIdToPostObject) {
 	));
 }
 
-Promise.all(promises).catch(err => {
+Promise.all(promises)
+.then(values => {
+	if(values.length == 0)
+		console.log(`No embeds were edited.`);
+	else if(values.length == 1)
+		console.log(`${values.length} embed successfully edited.`);
+	else
+		console.log(`${values.length} embeds successfully edited.`);
+})
+.catch(err => {
 	console.error(err.response);
 	process.exit(1);
 });
