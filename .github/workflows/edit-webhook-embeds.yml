@@ -1,21 +1,23 @@
-name: edit webhooks (main)
+name: test
 
 on:
   push:
+    branches:
+      - main
+      - '**'
   pull_request:
     branches:
       - main
   workflow_dispatch:
 
 jobs:
-  edit-webhooks:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: ${{ github.head_ref }}
         fetch-depth: 0
     - name: Update Discord embeds
-      uses: vertxxyz/discord-embeds-action@main
+      uses: ./
       with:
         webhooks_secret: ${{ secrets.WEBHOOKS }}
