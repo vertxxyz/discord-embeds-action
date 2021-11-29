@@ -9,7 +9,7 @@
     {
       "title": "Discord bot",
       "description": "Discohook has a complementary bot, while it's not strictly required to send messages it may be helpful to have it.\n\nBelow is a small but incomplete overview of what the bot can do for you.",
-      "color": 5814784,
+      "color": 5814783,
       "fields": [
         {
           "name": "Mentioning users, roles, channels, and using emojis",
