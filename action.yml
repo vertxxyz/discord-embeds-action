@@ -27,4 +27,4 @@ runs:
       npm config set fund false 
       npm install axios
       echo "excecuting patch-webhooks "
-      node patch-webhooks.js
+      node $GITHUB_ACTION_PATH/patch-webhooks.js
